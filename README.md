@@ -182,6 +182,66 @@ curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
 
 # install Wazuh server
 
+copy semua file tadi di indexer 1 atau 2 ke wazuh server
+
+
+root@serverpkl:/home/agungsurya# bash wazuh-install.sh --wazuh-server wazuh-1
+
+root@serverpkl:/home/agungsurya# systemctl daemon-reload
+
+root@serverpkl:/home/agungsurya# systemctl enable wazuh-manager
+
+root@serverpkl:/home/agungsurya# systemctl start wazuh-manager
+
+root@serverpkl:/home/agungsurya# curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/4.3/tpl/wazuh/filebeat/filebeat.yml
+
+root@serverpkl:/home/agungsurya# sudo nano /etc/filebeat/filebeat.yml
+
+
+root@serverpkl:/home/agungsurya# filebeat keystore create
+
+root@serverpkl:/home/agungsurya# echo admin | filebeat keystore add username --stdin --force
+
+root@serverpkl:/home/agungsurya# echo admin | filebeat keystore add password --stdin --force
+
+
+root@serverpkl:/home/agungsurya# curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.3/extensions/elasticsearch/7.x/wazuh-template.json
+
+root@serverpkl:/home/agungsurya# chmod go+r /etc/filebeat/wazuh-template.json
+
+
+
+root@serverpkl:/home/agungsurya# curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
+
+
+root@serverpkl:/home/agungsurya# NODE_NAME=wazuh-1
+
+root@serverpkl:/home/agungsurya# mkdir /etc/filebeat/certs
+
+root@serverpkl:/home/agungsurya# tar -xf ./wazuh-certificates.tar -C /etc/filebeat/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
+
+root@serverpkl:/home/agungsurya# mv -n /etc/filebeat/certs/$NODE_NAME.pem /etc/filebeat/certs/filebeat.pem
+
+root@serverpkl:/home/agungsurya# mv -n /etc/filebeat/certs/$NODE_NAME-key.pem /etc/filebeat/certs/filebeat-key.pem
+
+root@serverpkl:/home/agungsurya# chmod 500 /etc/filebeat/certs
+
+root@serverpkl:/home/agungsurya# chmod 400 /etc/filebeat/certs/*
+
+root@serverpkl:/home/agungsurya# chown -R root:root /etc/filebeat/certs
+
+
+
+root@serverpkl:/home/agungsurya# systemctl daemon-reload
+
+root@serverpkl:/home/agungsurya# systemctl enable filebeat
+
+root@serverpkl:/home/agungsurya# systemctl start filebeat
+
+root@serverpkl:/home/agungsurya# filebeat test output
+
+
+# Wazuh dashboard install
 
 
 
