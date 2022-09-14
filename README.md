@@ -136,6 +136,14 @@ Output
 
 ![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture1.PNG)
 
+# wazuh indexer 2 install
+
+root@wazuh-indexer-2:/home/agung# ls
+
+wazuh-certificates.tar  wazuh-certs-tool.sh  wazuh-install-files.tar  wazuh-install.sh
+
+root@wazuh-indexer-2:/home/agung#
+
 
 
 
