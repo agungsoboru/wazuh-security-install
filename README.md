@@ -1,20 +1,17 @@
-# wazuh-security-install
-wazuh-security-install step by step (wazuh indexer, wazuh server, wazuh dasboard)
-
-
 curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh
-
 curl -sO https://packages.wazuh.com/4.3/config.yml
 
-Edit ./config.yml and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
+root@wazuh-indexer-1:/home/agung# sudo nano config.yml
+
+edit config.yml seperti di bawah
 
 nodes:
   # Wazuh indexer nodes
   indexer:
     - name: node-1
-      ip: <indexer-node-ip>
-    # - name: node-2
-    #   ip: <indexer-node-ip>
+      ip: 172.x.x.35
+    - name: node-2
+      ip: 172.x.x.36
     # - name: node-3
     #   ip: <indexer-node-ip>
 
@@ -22,7 +19,7 @@ nodes:
   # Use node_type only with more than one Wazuh manager
   server:
     - name: wazuh-1
-      ip: <wazuh-manager-ip>
+      ip: 172.x.x.100
     # node_type: master
     # - name: wazuh-2
     #   ip: <wazuh-manager-ip>
@@ -31,62 +28,105 @@ nodes:
   # Wazuh dashboard node
   dashboard:
     - name: dashboard
-      ip: <dashboard-node-ip>
-      
-      
-
-# bash wazuh-install.sh --generate-config-files
-
-Copy the wazuh-install-files.tar file to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using, for example, scp.
-
-
-#bash wazuh-install.sh --wazuh-indexer node-1
-
-#bash wazuh-install.sh --start-cluster
+      ip: 172.x.x.100
 
 
 
 
-
-curl -sO https://packages.wazuh.com/4.3/wazuh-certs-tool.sh
-
-curl -sO https://packages.wazuh.com/4.3/config.yml
-
-
-
-#bash ./wazuh-certs-tool.sh -A
-
-
-tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
-rm -rf ./wazuh-certificates
+root@wazuh-indexer-1:/home/agung# bash wazuh-install.sh --generate-config-files
 
 
 
 
-NODE_NAME=<indexer-node-name>
+root@wazuh-indexer-1:/home/agung# ls
+wazuh-install-files.tar  wazuh-install.sh
+root@wazuh-indexer-1:/home/agung#
+
+
+
+root@wazuh-indexer-1:/home/agung# scp wazuh-install-files.tar user@172.x.x.36:/home/agung/
+root@wazuh-indexer-1:/home/agung# scp wazuh-install-files.tar user@172.x.x.100:/home/agungsurya/
+
+
+
+root@wazuh-indexer-1:/home/agung# bash wazuh-install.sh --wazuh-indexer node-1
+
+
+root@wazuh-indexer-1:/home/agung# bash wazuh-install.sh --start-cluster
+
+
+root@wazuh-indexer-1:/home/agung# curl -sO https://packages.wazuh.com/4.3/wazuh-certs-tool.sh
+root@wazuh-indexer-1:/home/agung# curl -sO https://packages.wazuh.com/4.3/config.yml
 
 
 
 
-mkdir /etc/wazuh-indexer/certs
-tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
-mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
-mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
-chmod 500 /etc/wazuh-indexer/certs
-chmod 400 /etc/wazuh-indexer/certs/*
-chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+root@wazuh-indexer-1:/home/agung# sudo nano config.yml
+
+nodes:
+  # Wazuh indexer nodes
+  indexer:
+    - name: node-1
+      ip: 172.x.x.35
+    - name: node-2
+      ip: 172.x.x.36
+    # - name: node-3
+    #   ip: <indexer-node-ip>
+
+  # Wazuh server nodes
+  # Use node_type only with more than one Wazuh manager
+  server:
+    - name: wazuh-1
+      ip: 172.x.x.100
+    # node_type: master
+    # - name: wazuh-2
+    #   ip: <wazuh-manager-ip>
+    # node_type: worker
+
+  # Wazuh dashboard node
+  dashboard:
+    - name: dashboard
+      ip: 172.x.x.100
 
 
 
 
-
-systemctl daemon-reload
-systemctl enable wazuh-indexer
-systemctl start wazuh-indexer
+root@wazuh-indexer-1:/home/agung# bash ./wazuh-certs-tool.sh -A
 
 
+root@wazuh-indexer-1:/home/agung# tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
+root@wazuh-indexer-1:/home/agung# rm -rf ./wazuh-certificates
 
-curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
+
+
+root@wazuh-indexer-1:/home/agung# scp wazuh-certificates.tar user@172.x.x.36:/home/agung/
+root@wazuh-indexer-1:/home/agung# scp wazuh-certificates.tar user@172.x.x.100:/home/agungsurya/
+
+
+
+root@wazuh-indexer-1:/home/agung# NODE_NAME=node-1
+
+root@wazuh-indexer-1:/home/agung# mkdir /etc/wazuh-indexer/certs
+root@wazuh-indexer-1:/home/agung# tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
+root@wazuh-indexer-1:/home/agung# mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+root@wazuh-indexer-1:/home/agung# mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+root@wazuh-indexer-1:/home/agung# chmod 500 /etc/wazuh-indexer/certs
+root@wazuh-indexer-1:/home/agung# chmod 400 /etc/wazuh-indexer/certs/*
+root@wazuh-indexer-1:/home/agung# chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+
+
+
+
+root@wazuh-indexer-1:/home/agung# systemctl daemon-reload
+root@wazuh-indexer-1:/home/agung# systemctl enable wazuh-indexer
+root@wazuh-indexer-1:/home/agung# systemctl start wazuh-indexer
+
+
+cek sudah berhasil apa belum
+
+root@wazuh-indexer-1:/home/agung# curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
+
+password terdapat di wazuh-install-files.tar extrat cari wazuh-password.txt
 
 
 Output
@@ -106,6 +146,7 @@ Output
   },
   "tagline" : "The OpenSearch Project: https://opensearch.org/"
 }
+
 
 
 
