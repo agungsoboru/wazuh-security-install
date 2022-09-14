@@ -243,7 +243,18 @@ root@serverpkl:/home/agungsurya# filebeat test output
 
 # Wazuh dashboard install
 
+copy semua file di indexer 1 atau 2 ke server wazuh dasboard
 
+root@serverpkl:/home/agungsurya# bash wazuh-install.sh --wazuh-dashboard dashboard
+
+
+akan keluar 
+
+INFO: --- Summary ---
+INFO: You can access the web interface https://<wazuh-dashboard-ip>
+    User: admin
+    Password: <ADMIN_PASSWORD>
+INFO: Installation finished.
 
 
 
