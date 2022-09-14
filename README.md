@@ -8,7 +8,7 @@ edit config.yml seperti di bawah
 
 
 
-![image]()
+![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture.PNG)
 
 
 
@@ -45,7 +45,7 @@ root@wazuh-indexer-1:/home/agung# sudo nano config.yml
 
 
 
-![image]()
+![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture1.PNG)
 
 
 root@wazuh-indexer-1:/home/agung# bash ./wazuh-certs-tool.sh -A
