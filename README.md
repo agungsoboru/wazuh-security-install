@@ -256,7 +256,7 @@ INFO: You can access the web interface https://<wazuh-dashboard-ip>
     Password: <ADMIN_PASSWORD>
 INFO: Installation finished.
   
-  
+ ![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture2.PNG)
  ![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture1.PNG)
 
 
