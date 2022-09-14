@@ -1,8 +1,11 @@
 # wazuh indexer 1 saja 
 
 # yang di perlukan
+
 wazuh-indexer = 2 (node/server)
+
 wazuh-server / wazuh-manager = 1 (node/server)
+
 wazuh-dasboard = 1 
 
 
