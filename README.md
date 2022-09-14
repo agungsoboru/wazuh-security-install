@@ -5,30 +5,6 @@ root@wazuh-indexer-1:/home/agung# sudo nano config.yml
 
 edit config.yml seperti di bawah
 
-nodes:
-  # Wazuh indexer nodes
-  indexer:
-    - name: node-1
-      ip: 172.x.x.35
-    - name: node-2
-      ip: 172.x.x.36
-    # - name: node-3
-    #   ip: <indexer-node-ip>
-
-  # Wazuh server nodes
-  # Use node_type only with more than one Wazuh manager
-  server:
-    - name: wazuh-1
-      ip: 172.x.x.100
-    # node_type: master
-    # - name: wazuh-2
-    #   ip: <wazuh-manager-ip>
-    # node_type: worker
-
-  # Wazuh dashboard node
-  dashboard:
-    - name: dashboard
-      ip: 172.x.x.100
 
 
 
@@ -63,30 +39,7 @@ root@wazuh-indexer-1:/home/agung# curl -sO https://packages.wazuh.com/4.3/config
 
 root@wazuh-indexer-1:/home/agung# sudo nano config.yml
 
-nodes:
-  # Wazuh indexer nodes
-  indexer:
-    - name: node-1
-      ip: 172.x.x.35
-    - name: node-2
-      ip: 172.x.x.36
-    # - name: node-3
-    #   ip: <indexer-node-ip>
 
-  # Wazuh server nodes
-  # Use node_type only with more than one Wazuh manager
-  server:
-    - name: wazuh-1
-      ip: 172.x.x.100
-    # node_type: master
-    # - name: wazuh-2
-    #   ip: <wazuh-manager-ip>
-    # node_type: worker
-
-  # Wazuh dashboard node
-  dashboard:
-    - name: dashboard
-      ip: 172.x.x.100
 
 
 
