@@ -1,3 +1,12 @@
+# wazuh indexer 1 saja 
+
+# yang di perlukan
+wazuh-indexer = 2 (node/server)
+wazuh-server / wazuh-manager = 1 (node/server)
+wazuh-dasboard = 1 
+
+
+
 curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh
 
 curl -sO https://packages.wazuh.com/4.3/config.yml
