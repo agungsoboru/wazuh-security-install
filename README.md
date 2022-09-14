@@ -48,7 +48,9 @@ root@wazuh-indexer-1:/home/agung# curl -sO https://packages.wazuh.com/4.3/config
 
 root@wazuh-indexer-1:/home/agung# sudo nano config.yml
 
+samakan seperti tadi
 
+![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture.PNG)
 
 
 
