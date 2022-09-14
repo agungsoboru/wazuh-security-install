@@ -19,12 +19,15 @@ root@wazuh-indexer-1:/home/agung# bash wazuh-install.sh --generate-config-files
 
 
 root@wazuh-indexer-1:/home/agung# ls
+
 wazuh-install-files.tar  wazuh-install.sh
+
 root@wazuh-indexer-1:/home/agung#
 
 
 
 root@wazuh-indexer-1:/home/agung# scp wazuh-install-files.tar user@172.x.x.36:/home/agung/
+
 root@wazuh-indexer-1:/home/agung# scp wazuh-install-files.tar user@172.x.x.100:/home/agungsurya/
 
 
@@ -36,6 +39,7 @@ root@wazuh-indexer-1:/home/agung# bash wazuh-install.sh --start-cluster
 
 
 root@wazuh-indexer-1:/home/agung# curl -sO https://packages.wazuh.com/4.3/wazuh-certs-tool.sh
+
 root@wazuh-indexer-1:/home/agung# curl -sO https://packages.wazuh.com/4.3/config.yml
 
 
@@ -52,11 +56,13 @@ root@wazuh-indexer-1:/home/agung# bash ./wazuh-certs-tool.sh -A
 
 
 root@wazuh-indexer-1:/home/agung# tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
+
 root@wazuh-indexer-1:/home/agung# rm -rf ./wazuh-certificates
 
 
 
 root@wazuh-indexer-1:/home/agung# scp wazuh-certificates.tar user@172.x.x.36:/home/agung/
+
 root@wazuh-indexer-1:/home/agung# scp wazuh-certificates.tar user@172.x.x.100:/home/agungsurya/
 
 
@@ -64,18 +70,26 @@ root@wazuh-indexer-1:/home/agung# scp wazuh-certificates.tar user@172.x.x.100:/h
 root@wazuh-indexer-1:/home/agung# NODE_NAME=node-1
 
 root@wazuh-indexer-1:/home/agung# mkdir /etc/wazuh-indexer/certs
+
 root@wazuh-indexer-1:/home/agung# tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
+
 root@wazuh-indexer-1:/home/agung# mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+
 root@wazuh-indexer-1:/home/agung# mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+
 root@wazuh-indexer-1:/home/agung# chmod 500 /etc/wazuh-indexer/certs
+
 root@wazuh-indexer-1:/home/agung# chmod 400 /etc/wazuh-indexer/certs/*
+
 root@wazuh-indexer-1:/home/agung# chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
 
 
 
 
 root@wazuh-indexer-1:/home/agung# systemctl daemon-reload
+
 root@wazuh-indexer-1:/home/agung# systemctl enable wazuh-indexer
+
 root@wazuh-indexer-1:/home/agung# systemctl start wazuh-indexer
 
 
