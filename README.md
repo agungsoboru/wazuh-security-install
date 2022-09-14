@@ -134,7 +134,7 @@ Output
 }
 
 
-![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture1.PNG)
+
 
 # wazuh indexer 2 install
 
@@ -255,6 +255,9 @@ INFO: You can access the web interface https://<wazuh-dashboard-ip>
     User: admin
     Password: <ADMIN_PASSWORD>
 INFO: Installation finished.
+  
+  
+ ![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture1.PNG)
 
 
 
