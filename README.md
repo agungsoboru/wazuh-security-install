@@ -138,11 +138,52 @@ Output
 
 # wazuh indexer 2 install
 
+copas semua file tadi di indexer 1 ke indexer 2
+
 root@wazuh-indexer-2:/home/agung# ls
 
-wazuh-certificates.tar  wazuh-certs-tool.sh  wazuh-install-files.tar  wazuh-install.sh
+config.yml wazuh-certificates.tar  wazuh-certs-tool.sh  wazuh-install-files.tar  wazuh-install.sh
 
-root@wazuh-indexer-2:/home/agung#
+root@wazuh-indexer-2:/home/agung# sudo nano config.yml
+
+root@wazuh-indexer-2:/home/agung# bash wazuh-install.sh --wazuh-indexer node-2
+
+root@wazuh-indexer-2:/home/agung# bash wazuh-install.sh --start-cluster
+
+
+root@wazuh-indexer-2:/home/agung# NODE_NAME=node-2
+
+
+root@wazuh-indexer-2:/home/agung# mkdir /etc/wazuh-indexer/certs
+
+root@wazuh-indexer-2:/home/agung# tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
+
+root@wazuh-indexer-2:/home/agung# mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+
+root@wazuh-indexer-2:/home/agung# mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+
+root@wazuh-indexer-2:/home/agung# chmod 500 /etc/wazuh-indexer/certs
+
+root@wazuh-indexer-2:/home/agung# chmod 400 /etc/wazuh-indexer/certs/*
+
+root@wazuh-indexer-2:/home/agung# chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+
+
+root@wazuh-indexer-2:/home/agung# systemctl daemon-reload
+
+root@wazuh-indexer-2:/home/agung# systemctl enable wazuh-indexer
+
+root@wazuh-indexer-2:/home/agung# systemctl start wazuh-indexer
+
+cek server indexer yg ke 2
+
+curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
+
+
+#install Wazuh server
+
+
+
 
 
 
