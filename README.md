@@ -8,6 +8,10 @@ edit config.yml seperti di bawah
 
 
 
+![image]()
+
+
+
 
 root@wazuh-indexer-1:/home/agung# bash wazuh-install.sh --generate-config-files
 
@@ -41,7 +45,7 @@ root@wazuh-indexer-1:/home/agung# sudo nano config.yml
 
 
 
-
+![image]()
 
 
 root@wazuh-indexer-1:/home/agung# bash ./wazuh-certs-tool.sh -A
