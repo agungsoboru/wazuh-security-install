@@ -1,4 +1,4 @@
-# wazuh indexer 1 saja 
+# wazuh install Cluster step by step
 
 # yang di perlukan
 
