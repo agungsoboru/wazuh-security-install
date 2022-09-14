@@ -1,4 +1,5 @@
 curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh
+
 curl -sO https://packages.wazuh.com/4.3/config.yml
 
 root@wazuh-indexer-1:/home/agung# sudo nano config.yml
