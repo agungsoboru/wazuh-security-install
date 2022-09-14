@@ -180,7 +180,7 @@ cek server indexer yg ke 2
 curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
 
 
-#install Wazuh server
+# install Wazuh server
 
 
 
