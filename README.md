@@ -45,7 +45,7 @@ root@wazuh-indexer-1:/home/agung# sudo nano config.yml
 
 
 
-![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture1.PNG)
+
 
 
 root@wazuh-indexer-1:/home/agung# bash ./wazuh-certs-tool.sh -A
@@ -104,6 +104,8 @@ Output
   "tagline" : "The OpenSearch Project: https://opensearch.org/"
 }
 
+
+![image](https://github.com/agungsoboru/wazuh-security-install/blob/main/gambar%20W/Capture1.PNG)
 
 
 
